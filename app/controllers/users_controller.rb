@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      # Log in user with params from the sign up page - different from login form
+      log_in @user
       #Handle a successful save.
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
