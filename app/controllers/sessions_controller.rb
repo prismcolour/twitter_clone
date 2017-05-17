@@ -4,17 +4,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    @user = User.find_by(email: params[:session][:email].downcase)
+    if @user && @user.authenticate(params[:session][:password])
       # Log the user in and redirect to the user's show page.
-      log_in user
+      log_in @user
       # remember user - ORIGINAL CODE/method call 
       # remember(user) from sessions helper file
       # replaced with the next line for 
       # boolean to take in the value for the checkbox 
       # if 1 remember user because user checked the box
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+      redirect_to @user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
