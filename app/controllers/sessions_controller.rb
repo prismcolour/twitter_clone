@@ -17,7 +17,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    # Fix for bug when user has multiple browser windows open
+    # If logged out in one browser window cannot log out in
+    # another browser window otherwise it will cause an error 
+    # because there will be a second call to log_out where the
+    # @current_user is missing inside the method
+    # already logged out of application in the original browser window
+    # subtle bug
+    log_out if logged_in?
     redirect_to root_url
   end
 end
