@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
+  
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -22,6 +24,19 @@ class User < ApplicationRecord
   # and saving the digest of the token to the database.
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+  
+  # Remembers a user in the database for use in 
+  # persistent sessions.  remember_digest is for the cookie
+  # Returning a random token for the cookie - password generated
+  # Then it needs to get hashed from User.digest via Bcrypt
+  # Then it needs to get placed inside the remember_digest 
+  # column in users table
+  # token, hashed, put in table
+  
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
   
 end
