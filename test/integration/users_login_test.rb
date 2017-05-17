@@ -47,7 +47,12 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   
    test "login with remembering" do
     log_in_as(@user, remember_me: '1')
-    assert_not_empty cookies['remember_token']
+    # Previous test code
+    # assert_not_empty cookies['remember_token']
+    # using assigns(:user) to use the @user instance in the sessions
+    # controller instead of cookies['remember_token'] accessing 
+    # encrypted user_id
+    assert_equal cookies['remember_token'], assigns(:user).remember_token
   end
 
   test "login without remembering" do
