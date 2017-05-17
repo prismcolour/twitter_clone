@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # Returns the hash digest of the given string/
   # Used in the test fixtures file to generate the hash password 
   # User.digest
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # Returns a random token.
   # Remembering users involves creating a remember token 
   # and saving the digest of the token to the database.
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
   
