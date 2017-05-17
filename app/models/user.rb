@@ -48,6 +48,7 @@ class User < ApplicationRecord
   end
   
   # Forgets a user for persistent session.
+  # Undoes user.remember by updating the remember_digest with nil.
   def forget
     update_attribute(:remember_digest, nil)
   end
