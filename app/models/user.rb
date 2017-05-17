@@ -16,4 +16,12 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+  
+  # Returns a random token.
+  # Remembering users involves creating a remember token 
+  # and saving the digest of the token to the database.
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+  
 end
