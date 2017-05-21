@@ -18,9 +18,15 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
   
-  test "successful edit" do
+  test "successful edit with friendly forwarding" do
     get edit_user_path(@user)
-    assert_template 'users/edit'
+    log_in_as(@user)
+    # assert_template 'users/edit'
+    # Updated test for friendly forwarding
+    # TDD for redirect explained via 
+    # http://stackoverflow.com/questions/30768657
+    # /how-do-i-check-to-see-if-a-user-will-be-redirected-to-his-her-profile-after-logi
+    assert_equal session[:forwarding_url], nil
     name  = "Foo Bar"
     email = "foo@bar.com"
     
