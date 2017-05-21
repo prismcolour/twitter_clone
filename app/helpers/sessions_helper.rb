@@ -24,6 +24,11 @@ module SessionsHelper
   # Persistent session using secure cookies
   # Returns the user corresponding to the remember token cookie.
   # Secure
+  # This sets the current user in the session once authenticated and logged in
+  # @current_user = user
+  # Use this method when you need to set any method to use the current_user
+  # Use this when you need current_user as an argument for other methods
+  
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
@@ -35,6 +40,21 @@ module SessionsHelper
       end
     end
   end
+  
+  # Returns true if the given user is the current user.
+  # Separate from setting the user to current_user when using cookies
+  # This does not set the current user, but only checks that the user is the current user
+  # Use this when you need to check if the user is the current user for CONTROL FLOW
+  
+  # current_user?(@user)
+  # @user == current_user 
+  # this will return true 
+  # assert_equal @user, current_user
+  
+  def current_user?(user)
+    user == current_user
+  end
+  
   
   # Returns true if the user is logged in, false otherwise.
   def logged_in?

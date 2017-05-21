@@ -59,9 +59,10 @@ def update
     # another user's profile
     # Use the current_user method
     
+    # Going to do the redirect if it's not the current user trying to edit/update the page
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
 
