@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
       # boolean to take in the value for the checkbox 
       # if 1 remember user because user checked the box
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to @user
+      # redirect_to @user OLD CODE - updated with friendly forwarding
+      redirect_back_or @user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
