@@ -26,5 +26,5 @@ class UserMailerPreview < ActionMailer::Preview
   
   # Preview email is working now
   # https://michael-hartl-rails-tutorial-prismcolour.c9users.io/rails/mailers/user_mailer/account_activation
-
+  # http://michael-hartl-rails-tutorial-prismcolour.c9users.io/rails/mailers/user_mailer/account_activation.txt
 end
