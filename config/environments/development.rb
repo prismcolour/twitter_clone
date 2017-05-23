@@ -26,8 +26,13 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Needs to get updated to true
+  config.action_mailer.raise_delivery_errors = true
+  
+  # Added code from Rails tutorial to configure Action Mailer
+  config.action_mailer.delivery_method = :test
+  host = 'michael-hartl-rails-tutorial-prismcolour.c9users.io' # Don't use this literally; use your local dev host instead
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
   config.action_mailer.perform_caching = false
 
