@@ -23,5 +23,8 @@ class UserMailerPreview < ActionMailer::Preview
   def password_reset
     UserMailer.password_reset
   end
+  
+  # Preview email is working now
+  # https://michael-hartl-rails-tutorial-prismcolour.c9users.io/rails/mailers/user_mailer/account_activation
 
 end
