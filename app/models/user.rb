@@ -115,9 +115,9 @@ class User < ApplicationRecord
   
   # Defines a proto-feed.
   # See "Following users" for the full implementation.
-  def feed
-    Micropost.where("user_id = ?", id)
-  end
+  #def feed
+  #  Micropost.where("user_id = ?", id)
+  #end
   
   # Follows a user.
   def follow(other_user)
